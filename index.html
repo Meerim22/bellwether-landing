@@ -396,6 +396,45 @@
   .foot-in a:hover{ color:var(--ink); }
   .foot-in .sp{ margin-left:auto; }
 
+  /* ---------- reveal on scroll ----------
+     The hidden state lives behind .js-reveal, which only the script adds, and
+     only when motion is allowed. Without JS, with reduced motion, or if the
+     script fails, every element below stays exactly where it is: visible. */
+  html.js-reveal .reveal{ opacity:0; transform:translateY(18px); }
+  html.js-reveal .reveal.in{
+    opacity:1; transform:none;
+    transition:opacity .62s cubic-bezier(.22,.61,.36,1),
+               transform .62s cubic-bezier(.22,.61,.36,1);
+    transition-delay:var(--d,0ms);
+  }
+  /* the phone rises a little further, and from the side it sits on */
+  html.js-reveal .phone.reveal,
+  html.js-reveal .shot-media.reveal{ transform:translateY(26px) scale(.985); }
+  html.js-reveal .phone.reveal.in,
+  html.js-reveal .shot-media.reveal.in{ transform:none; }
+
+  /* staggers, so a group arrives as a group rather than all at once */
+  .features .feat:nth-child(1),.steps .step:nth-child(1){ --d:0ms; }
+  .features .feat:nth-child(2),.steps .step:nth-child(2){ --d:70ms; }
+  .features .feat:nth-child(3),.steps .step:nth-child(3){ --d:140ms; }
+  .features .feat:nth-child(4){ --d:70ms; }
+  .features .feat:nth-child(5){ --d:140ms; }
+  .features .feat:nth-child(6){ --d:210ms; }
+  .hero-copy .reveal:nth-child(1){ --d:0ms; }
+  .hero-copy .reveal:nth-child(2){ --d:80ms; }
+  .hero-copy .reveal:nth-child(3){ --d:160ms; }
+  .hero-copy .reveal:nth-child(4){ --d:240ms; }
+  .hero-copy .reveal:nth-child(5){ --d:320ms; }
+  .phone.reveal{ --d:180ms; }
+  .shot-copy.reveal{ --d:90ms; }
+  .sources .reveal:nth-child(2){ --d:70ms; }
+  .sources .reveal:nth-child(3){ --d:140ms; }
+  .sources .reveal:nth-child(4){ --d:210ms; }
+
+  @media (prefers-reduced-motion:reduce){
+    html.js-reveal .reveal{ opacity:1; transform:none; }
+  }
+
   @media (prefers-reduced-motion:reduce){
     *{ transition-duration:.01ms !important; animation-duration:.01ms !important; }
   }
@@ -420,17 +459,17 @@
 <header class="hero wrap" id="top">
   <div class="hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow">Family health, quietly</p>
-      <h1>Watch the health of<br>the people you <em>love</em>.</h1>
-      <p class="lede">Bellwether pulls sleep, activity and stress straight from Apple Health and Health Connect, then hands you one calm summary each morning — how everyone slept, who moved, and what is worth a phone call.</p>
-      <div class="cta-row">
+      <p class="eyebrow reveal">Family health, quietly</p>
+      <h1 class="reveal">Watch the health of<br>the people you <em>love</em>.</h1>
+      <p class="lede reveal">Bellwether pulls sleep, activity and stress straight from Apple Health and Health Connect, then hands you one calm summary each morning — how everyone slept, who moved, and what is worth a phone call.</p>
+      <div class="cta-row reveal">
         <a class="btn btn-primary" href="#get">Get the app</a>
         <a class="btn btn-ghost" href="#screens">See it in the app</a>
       </div>
-      <p class="stores">iOS 16+ &nbsp;·&nbsp; Android 10+ &nbsp;·&nbsp; No ads, no data resale</p>
+      <p class="stores reveal">iOS 16+ &nbsp;·&nbsp; Android 10+ &nbsp;·&nbsp; No ads, no data resale</p>
     </div>
 
-    <div class="phone">
+    <div class="phone reveal">
       <div class="screen">
         <div class="splash-mark" aria-hidden="true"></div>
         <p class="splash-name">Bellwether</p>
@@ -448,35 +487,35 @@
 
 <div class="strip">
   <div class="wrap sources">
-    <div class="src">
+    <div class="src reveal">
       <span class="src-ico" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none"><path d="M12 20.5S3.5 15.4 3.5 9.6A4.6 4.6 0 0 1 12 7a4.6 4.6 0 0 1 8.5 2.6c0 5.8-8.5 10.9-8.5 10.9Z" fill="var(--alert)"/></svg>
       </span>
       <span><b class="src-name">Apple Health</b><span class="src-plat">iOS · HealthKit</span></span>
     </div>
 
-    <div class="src">
+    <div class="src reveal">
       <span class="src-ico" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="var(--sleep)" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2.5-6 3.5 12 3-8 2 2h5"/></svg>
       </span>
       <span><b class="src-name">Health Connect</b><span class="src-plat">Android</span></span>
     </div>
 
-    <p class="src-note">Whatever writes into them arrives too — <b>Apple Watch, Fitbit, Garmin, Oura</b> and the rest. Bellwether reads the platform, not the brand.</p>
+    <p class="src-note reveal">Whatever writes into them arrives too — <b>Apple Watch, Fitbit, Garmin, Oura</b> and the rest. Bellwether reads the platform, not the brand.</p>
 
-    <p class="src-assure"><i aria-hidden="true"></i>Read-only. Nothing is written back.</p>
+    <p class="src-assure reveal"><i aria-hidden="true"></i>Read-only. Nothing is written back.</p>
   </div>
 </div>
 
 <section id="features" class="wrap">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <p class="eyebrow">What you get</p>
     <h2>Six things, done properly.</h2>
     <p>Everything on the family dashboard is a number someone's own device already recorded. Bellwether's job is to make it legible in about four seconds.</p>
   </div>
 
   <div class="features">
-    <article class="feat" style="--f:var(--accent)">
+    <article class="feat reveal" style="--f:var(--accent)">
       <p class="eyebrow">Circle summary</p>
       <h3>Who needs you today</h3>
       <p>Rather than a wall of figures, Home opens with the exception — whoever had the roughest night, or nobody at all. The numbers are underneath if you want them.</p>
@@ -486,7 +525,7 @@
       </div>
     </article>
 
-    <article class="feat" style="--f:var(--deep)">
+    <article class="feat reveal" style="--f:var(--deep)">
       <p class="eyebrow">Sleep tracking</p>
       <h3>Duration, quality, score</h3>
       <p>Deep, core and REM broken out per night, with a 0–100 score so a rough week is obvious without reading a chart.</p>
@@ -496,7 +535,7 @@
       </div>
     </article>
 
-    <article class="feat" style="--f:var(--good)">
+    <article class="feat reveal" style="--f:var(--good)">
       <p class="eyebrow">Daily goals</p>
       <h3>Set the bar yourself</h3>
       <p>Give a day its own target — 10,000 steps, two hours of exercise — and the calendar marks the ones you clear in your own colour. Clear every target and the day turns gold.</p>
@@ -506,7 +545,7 @@
       </div>
     </article>
 
-    <article class="feat" style="--f:var(--violet)">
+    <article class="feat reveal" style="--f:var(--violet)">
       <p class="eyebrow">AI recommendations</p>
       <h3>Short tips, from real trends</h3>
       <p>Personalised prompts drawn from the last two weeks of your own figures — never generic advice, and never a diagnosis.</p>
@@ -516,7 +555,7 @@
       </div>
     </article>
 
-    <article class="feat" style="--f:var(--core)">
+    <article class="feat reveal" style="--f:var(--core)">
       <p class="eyebrow">Mutual sharing</p>
       <h3>One link, both directions</h3>
       <p>Send a private link; they choose what to share. It runs both ways or not at all, and either of you can end it in one tap.</p>
@@ -526,7 +565,7 @@
       </div>
     </article>
 
-    <article class="feat" style="--f:var(--rem)">
+    <article class="feat reveal" style="--f:var(--rem)">
       <p class="eyebrow">Security</p>
       <h3>Enforced at the database</h3>
       <p>The sharing rules live in the database as row-level security, not just in the screens. Encrypted in transit and at rest, and wiped from the device on sign-out.</p>
@@ -540,7 +579,7 @@
 
 
 <section id="screens" class="wrap">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <p class="eyebrow">A look inside</p>
     <h2>The real thing, screen by screen.</h2>
     <p>Actual screenshots from the app, in the mode you picked in the top bar. Switch between <strong style="color:var(--ink)">Midnight</strong> and <strong style="color:var(--ink)">Ember</strong> and every screen below changes with it — the app ships both, and so does this page.</p>
@@ -548,13 +587,13 @@
 
   <div class="showcase">
     <figure class="shot" data-shot="home">
-      <div class="shot-media">
+      <div class="shot-media reveal">
         <div class="shot-frame">
           <img alt="The Bellwether Home screen." loading="lazy" width="390" height="845">
           <span class="shot-empty"><span class="ph-mark"></span><b>Home</b><code></code></span>
         </div>
       </div>
-      <figcaption class="shot-copy">
+      <figcaption class="shot-copy reveal">
         <span class="shot-index" aria-hidden="true">01</span>
         <p class="shot-eyebrow"><b>01</b> Home</p>
         <h3>Everyone’s morning, in one screen</h3>
@@ -564,13 +603,13 @@
     </figure>
 
     <figure class="shot" data-shot="circle">
-      <div class="shot-media">
+      <div class="shot-media reveal">
         <div class="shot-frame">
           <img alt="The Bellwether Circle screen." loading="lazy" width="390" height="845">
           <span class="shot-empty"><span class="ph-mark"></span><b>Circle</b><code></code></span>
         </div>
       </div>
-      <figcaption class="shot-copy">
+      <figcaption class="shot-copy reveal">
         <span class="shot-index" aria-hidden="true">02</span>
         <p class="shot-eyebrow"><b>02</b> Circle</p>
         <h3>The people you share with</h3>
@@ -580,13 +619,13 @@
     </figure>
 
     <figure class="shot" data-shot="sleep">
-      <div class="shot-media">
+      <div class="shot-media reveal">
         <div class="shot-frame">
           <img alt="The Bellwether Sleep screen." loading="lazy" width="390" height="845">
           <span class="shot-empty"><span class="ph-mark"></span><b>Sleep</b><code></code></span>
         </div>
       </div>
-      <figcaption class="shot-copy">
+      <figcaption class="shot-copy reveal">
         <span class="shot-index" aria-hidden="true">03</span>
         <p class="shot-eyebrow"><b>03</b> Sleep</p>
         <h3>Duration, quality and a score</h3>
@@ -596,13 +635,13 @@
     </figure>
 
     <figure class="shot" data-shot="win-streak">
-      <div class="shot-media">
+      <div class="shot-media reveal">
         <div class="shot-frame">
           <img alt="The Bellwether Win streak screen." loading="lazy" width="390" height="845">
           <span class="shot-empty"><span class="ph-mark"></span><b>Win streak</b><code></code></span>
         </div>
       </div>
-      <figcaption class="shot-copy">
+      <figcaption class="shot-copy reveal">
         <span class="shot-index" aria-hidden="true">04</span>
         <p class="shot-eyebrow"><b>04</b> Win streak</p>
         <h3>A month of days that counted</h3>
@@ -612,13 +651,13 @@
     </figure>
 
     <figure class="shot" data-shot="health">
-      <div class="shot-media">
+      <div class="shot-media reveal">
         <div class="shot-frame">
           <img alt="The Bellwether Health screen." loading="lazy" width="390" height="845">
           <span class="shot-empty"><span class="ph-mark"></span><b>Health</b><code></code></span>
         </div>
       </div>
-      <figcaption class="shot-copy">
+      <figcaption class="shot-copy reveal">
         <span class="shot-index" aria-hidden="true">05</span>
         <p class="shot-eyebrow"><b>05</b> Health</p>
         <h3>Your own numbers, over time</h3>
@@ -628,13 +667,13 @@
     </figure>
 
     <figure class="shot" data-shot="alerts">
-      <div class="shot-media">
+      <div class="shot-media reveal">
         <div class="shot-frame">
           <img alt="The Bellwether Alerts screen." loading="lazy" width="390" height="845">
           <span class="shot-empty"><span class="ph-mark"></span><b>Alerts</b><code></code></span>
         </div>
       </div>
-      <figcaption class="shot-copy">
+      <figcaption class="shot-copy reveal">
         <span class="shot-index" aria-hidden="true">06</span>
         <p class="shot-eyebrow"><b>06</b> Alerts</p>
         <h3>Nudges, not notifications</h3>
@@ -646,7 +685,7 @@
 </section>
 
 <section class="wrap">
-  <div class="band">
+  <div class="band reveal">
     <div class="band-grid">
       <div class="stack">
         <p class="eyebrow">Why people keep it</p>
@@ -665,21 +704,21 @@
 </section>
 
 <section id="privacy" class="wrap">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <p class="eyebrow">How sharing works</p>
     <h2>Consent-based, start to finish.</h2>
     <p>Nobody appears on your dashboard without agreeing to it first, and health data never moves without both people saying yes.</p>
   </div>
   <div class="steps">
-    <div class="step">
+    <div class="step reveal">
       <h3>Invite someone</h3>
       <p>Send a single-use link to a parent, a sibling or a friend. It expires if it is not used.</p>
     </div>
-    <div class="step">
+    <div class="step reveal">
       <h3>Their choice</h3>
       <p>Sleep, activity, stress — each one is opt-in, on their device, in plain language.</p>
     </div>
-    <div class="step">
+    <div class="step reveal">
       <h3>Both sides see the same</h3>
       <p>Sharing is mutual by design. Either of you can pause or end it, and the data stops immediately.</p>
     </div>
@@ -692,7 +731,7 @@
 </section>
 
 <section id="get" class="wrap" style="padding-block:calc(var(--band) * 1.4)">
-  <div class="close">
+  <div class="close reveal">
     <p class="eyebrow">What are you waiting for?</p>
     <h2>Tomorrow morning, you will already know.</h2>
     <p>Simple, private and genuinely useful. Only the information that helps you look after the people you love.</p>
@@ -751,5 +790,44 @@
       if (saved === 'ember' || saved === 'midnight') { start = saved; }
     } catch (e) {}
     apply(start);
+  })();
+</script>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var els = [].slice.call(document.querySelectorAll('.reveal'));
+    if (!els.length || !('IntersectionObserver' in window)) { return; }
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+
+    // No measurable viewport means we cannot tell what is on screen — a hidden
+    // tab, a prerender, a thumbnail capture. Hiding anything there risks
+    // leaving the page blank, so leave it all visible and do nothing.
+    var vh = window.innerHeight || 0;
+    if (!vh || document.hidden) { return; }
+
+    root.classList.add('js-reveal');
+
+    // Anything already on screen is shown in the first frame, so the page is
+    // never captured or read mid-animation at the top.
+    els.forEach(function (el) {
+      if (el.getBoundingClientRect().top < vh * 0.92) { el.classList.add('in'); }
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
+
+    els.forEach(function (el) { if (!el.classList.contains('in')) { io.observe(el); } });
+
+    // Failsafes: nothing stays invisible, whatever happens to the observer.
+    var showAll = function () { els.forEach(function (el) { el.classList.add('in'); }); };
+    setTimeout(showAll, 2000);
+    window.addEventListener('pagehide', showAll);
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { showAll(); }   // timers throttle in a background tab
+    });
   })();
 </script>
