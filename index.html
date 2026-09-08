@@ -400,11 +400,11 @@
      The hidden state lives behind .js-reveal, which only the script adds, and
      only when motion is allowed. Without JS, with reduced motion, or if the
      script fails, every element below stays exactly where it is: visible. */
-  html.js-reveal .reveal{ opacity:0; transform:translateY(18px); }
+  html.js-reveal .reveal{ opacity:0; transform:translateY(24px); }
   html.js-reveal .reveal.in{
     opacity:1; transform:none;
-    transition:opacity .62s cubic-bezier(.22,.61,.36,1),
-               transform .62s cubic-bezier(.22,.61,.36,1);
+    transition:opacity .78s cubic-bezier(.16,.68,.3,1),
+               transform .78s cubic-bezier(.16,.68,.3,1);
     transition-delay:var(--d,0ms);
   }
   /* the phone rises a little further, and from the side it sits on */
@@ -770,7 +770,7 @@
         img.onload = function () { frame.classList.add('ready'); };
         img.onerror = function () { frame.classList.remove('ready'); };
         img.setAttribute('src', path);
-      });
+        });
     }
 
     function apply(mode) {
@@ -800,34 +800,50 @@
     if (!els.length || !('IntersectionObserver' in window)) { return; }
     if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
 
-    // No measurable viewport means we cannot tell what is on screen — a hidden
-    // tab, a prerender, a thumbnail capture. Hiding anything there risks
-    // leaving the page blank, so leave it all visible and do nothing.
-    var vh = window.innerHeight || 0;
-    if (!vh || document.hidden) { return; }
-
-    root.classList.add('js-reveal');
-
-    // Anything already on screen is shown in the first frame, so the page is
-    // never captured or read mid-animation at the top.
-    els.forEach(function (el) {
-      if (el.getBoundingClientRect().top < vh * 0.92) { el.classList.add('in'); }
-    });
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    // Without a measurable viewport we cannot tell what is on screen — a
+    // background tab, a prerender, a thumbnail capture — and hiding things
+    // there risks leaving the page blank. So wait for the document to become
+    // visible rather than giving up on the animation entirely.
+    if (document.hidden || !window.innerHeight) {
+      document.addEventListener('visibilitychange', function again() {
+        if (!document.hidden && window.innerHeight) {
+          document.removeEventListener('visibilitychange', again);
+          start();
+        }
       });
-    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
+      return;
+    }
+    start();
 
-    els.forEach(function (el) { if (!el.classList.contains('in')) { io.observe(el); } });
+    function start() {
+      var vh = window.innerHeight;
+      root.classList.add('js-reveal');
 
-    // Failsafes: nothing stays invisible, whatever happens to the observer.
-    var showAll = function () { els.forEach(function (el) { el.classList.add('in'); }); };
-    setTimeout(showAll, 2000);
-    window.addEventListener('pagehide', showAll);
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) { showAll(); }   // timers throttle in a background tab
-    });
+      // Anything already on screen is shown in the first frame, so the top of
+      // the page is never read or captured mid-animation.
+      els.forEach(function (el) {
+        if (el.getBoundingClientRect().top < vh * 0.92) { el.classList.add('in'); }
+      });
+
+      // Each element waits for its own scroll position. Triggering a little
+      // before the element's top edge reaches the fold means it finishes
+      // arriving about when the reader gets to it.
+      var fired = false;
+      var io = new IntersectionObserver(function (entries) {
+        fired = true;
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
+
+      els.forEach(function (el) { if (!el.classList.contains('in')) { io.observe(el); } });
+
+      // Failsafe only for a broken observer — never a blanket timer, which would
+      // reveal the whole page before the reader had scrolled to any of it. An
+      // observer always reports on its targets once, so silence means trouble.
+      var showAll = function () { els.forEach(function (el) { el.classList.add('in'); }); };
+      setTimeout(function () { if (!fired) { showAll(); } }, 1500);
+      window.addEventListener('pagehide', showAll);
+    }
   })();
 </script>
