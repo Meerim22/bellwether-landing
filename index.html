@@ -455,13 +455,15 @@
     .brand{ font-size:.95rem; gap:.45rem; }
     .brand .mark{ width:25px; height:25px; border-radius:7px; }
     .nav-links{ gap:.4rem; }
-    .modes{ padding:3px; }
+    /* the toggle matches the button beside it: 2px padding + 1px border on
+       each side of a 34px control comes to the same 40px as the CTA */
+    .modes{ padding:2px; }
     .modes button{
-      padding:0; min-width:40px; min-height:40px;   /* a real tap target */
+      padding:0; min-width:40px; min-height:34px;
       justify-content:center;
     }
     .modes button .lbl{ display:none; }
-    .modes .sw{ width:19px; height:19px; }
+    .modes .sw{ width:18px; height:18px; }
     .nav-links .btn{ padding:.5rem .75rem; font-size:.85rem; }
   }
   @media (max-width:360px){
