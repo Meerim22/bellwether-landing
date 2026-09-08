@@ -54,3 +54,11 @@ Then open http://localhost:4174.
 - [ ] Point the App Store and Google Play buttons at the real listings — they are
       `#get` placeholders today.
 - [ ] Add an Open Graph image and description for link previews.
+
+## Licence
+
+© 2026 Bellwether. All rights reserved.
+
+This repository is public so the site can be served from GitHub Pages. The
+source is not offered under an open-source licence: the Bellwether name, logo,
+copy and design are not free to reuse.
