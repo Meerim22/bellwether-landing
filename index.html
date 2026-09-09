@@ -55,6 +55,35 @@
 
   *,*::before,*::after{ box-sizing:border-box; }
 
+  /* ---------- scrollbars ----------
+     The default bar is bright system chrome against a near-black page, which
+     reads as a seam down the right edge. Both modes are dark, so color-scheme
+     hands Firefox and every unstyled scroller a dark bar for free; the rules
+     under it shape the one WebKit lets us draw. The thumb is built from the
+     mode's own ink, so it follows the toggle. */
+  :root{ --sb-thumb:rgba(238,241,248,.16); --sb-thumb-hover:rgba(238,241,248,.30); }
+  [data-mode="ember"]{ --sb-thumb:rgba(246,239,228,.16); --sb-thumb-hover:rgba(246,239,228,.30); }
+
+  html{ color-scheme:dark; scrollbar-width:thin; scrollbar-color:var(--sb-thumb) transparent; }
+
+  /* Anchor jumps glide instead of cutting — but only for readers who have not
+     asked the OS to hold motion still. */
+  @media (prefers-reduced-motion:no-preference){ html{ scroll-behavior:smooth; } }
+
+  ::-webkit-scrollbar{ width:11px; height:11px; }
+  ::-webkit-scrollbar-track{ background:transparent; }
+  ::-webkit-scrollbar-thumb{
+    background:var(--sb-thumb);
+    border-radius:999px;
+    /* A transparent border plus content-box clipping insets the thumb, so it
+       floats in the gutter instead of filling it wall to wall. */
+    border:3px solid transparent;
+    background-clip:content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover{ background:var(--sb-thumb-hover); background-clip:content-box; }
+  ::-webkit-scrollbar-thumb:active{ background:var(--accent); background-clip:content-box; }
+  ::-webkit-scrollbar-corner{ background:transparent; }
+
   body{
     margin:0;
     background:
