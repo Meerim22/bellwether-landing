@@ -1,5 +1,21 @@
+<!doctype html>
+<html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  // Appearance is set before first paint. The toggle at the end of the body
+  // owns the rest, but reading the saved mode there is too late: the page has
+  // already rendered in Midnight by then, so anyone who picked Ember last
+  // visit watches it snap over.
+  (function () {
+    try {
+      var saved = localStorage.getItem("bw-mode");
+      if (saved === "ember" || saved === "midnight") {
+        document.documentElement.setAttribute("data-mode", saved);
+      }
+    } catch (e) {}
+  })();
+</script>
 <title>Bellwether</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,6 +90,10 @@
     background:color-mix(in srgb, var(--bg-base) 78%, transparent);
     border-bottom:1px solid var(--border);
   }
+  /* The nav is 60px and sticky, so a section jumped to from it would sit
+     underneath the bar. Hold each target clear of it, the way .sec does on
+     the legal pages. */
+  #top, #features, #screens, #privacy, #get{ scroll-margin-top:78px; }
   .nav-in{ display:flex; align-items:center; gap:1.1rem; padding:.72rem 0; }
   .brand{ display:flex; align-items:center; gap:.6rem; font-weight:700; letter-spacing:-.01em; text-decoration:none; }
   .mark{
@@ -878,3 +898,4 @@
     }
   })();
 </script>
+</html>

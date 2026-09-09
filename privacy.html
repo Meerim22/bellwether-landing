@@ -1,5 +1,21 @@
+<!doctype html>
+<html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  // Appearance is set before first paint. The toggle at the end of the body
+  // owns the rest, but reading the saved mode there is too late: the page has
+  // already rendered in Midnight by then, so anyone who picked Ember last
+  // visit watches it snap over.
+  (function () {
+    try {
+      var saved = localStorage.getItem("bw-mode");
+      if (saved === "ember" || saved === "midnight") {
+        document.documentElement.setAttribute("data-mode", saved);
+      }
+    } catch (e) {}
+  })();
+</script>
 <title>Bellwether Privacy Policy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -568,3 +584,4 @@
     } catch (e) {}
   })();
 </script>
+</html>
