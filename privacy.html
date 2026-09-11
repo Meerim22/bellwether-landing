@@ -256,7 +256,7 @@
   <div class="wrap inner">
     <p class="eyebrow">Legal</p>
     <h1>Privacy Policy</h1>
-    <p class="dates"><span>Effective <b>4 September 2026</b></span><span>Last updated <b>4 September 2026</b></span><span>App <b>com.bellw.app</b></span></p>
+    <p class="dates"><span>Effective <b>4 September 2026</b></span><span>Last updated <b>11 September 2026</b></span><span>App <b>com.bellw.app</b></span></p>
     <p class="standfirst">This app handles health information, so this policy says exactly what leaves your phone, where it goes, and what your family can and cannot see. It applies to the Bellwether mobile app for iOS and Android.</p>
   </div>
 </header>
@@ -301,7 +301,7 @@
         <div><b>Only people you connected with can see you</b><span>Sharing requires a mutual connection. Being in a friend-of-a-friend's circle gives no visibility.</span></div>
         <div><b>We do not sell your data</b><span>Not to anyone, for any price. We do not share it for cross-context behavioral advertising. There are no ad networks or advertising SDKs in this app.</span></div>
         <div><b>Health data is never sent to analytics</b><span>Our analytics tool receives event names only — never a step count, sleep score or heart rate.</span></div>
-        <div><b>AI insights send numbers, not names</b><span>Daily figures go to OpenAI to generate insight text. Your name, email and account ID do not.</span></div>
+        <div><b>AI insights send numbers, not names</b><span>Daily figures go to an AI provider (OpenRouter, Anthropic or Google) to generate insight text. Your name, email and account ID do not.</span></div>
         <div><b>You can turn it off</b><span>Revoke health access in your phone's system settings and uploads stop immediately.</span></div>
       </div>
     </section>
@@ -446,12 +446,18 @@
       </div>
 
       <div class="sub">
-        <h3>6.2 OpenAI — AI insights and suggested nudges</h3>
-        <p>When you view AI insights, the app sends a request through our own server (never directly from your phone, and never with an API key in the app) to OpenAI's <code>gpt-4o-mini</code> model.</p>
+        <h3>6.2 AI providers — AI insights and suggested nudges</h3>
+        <p>When you view AI insights, the app sends a request through our own server (never directly from your phone, and never with an API key in the app) to one AI provider at a time, in an order we set. The next provider receives the request only if the one before it failed to answer.</p>
+        <ul>
+          <li><strong>OpenRouter</strong> forwards the request to one of the companies hosting OpenAI's <code>gpt-4o-mini</code> model. OpenRouter does not store prompts or responses; the hosting company that serves the request handles it under its own terms.</li>
+          <li><strong>Anthropic</strong> (<code>claude-haiku-4-5</code> model). Under Anthropic's commercial terms, data submitted through its API is not used to train its models.</li>
+          <li><strong>Google</strong> (Gemini API, <code>gemini-3.5-flash-lite</code> model), on paid terms, under which Google does not use prompts or responses to improve its products and keeps them only for a limited period to detect abuse.</li>
+        </ul>
+        <p>Whichever provider answers receives the same data:</p>
         <p><strong>What is sent:</strong> your daily figures only — sleep hours and score, deep and REM minutes, steps, distance, exercise minutes, heart rate and its range, heart rate variability, VO₂ max and a stress score; plus the reply language and whether the data belongs to you or “a family member.”</p>
         <p><strong>What is not sent:</strong> your name, email address, account identifier, device identifier, profile photo, circle membership, or any free text you have typed. When generating a suggested nudge, the recipient's name is deliberately excluded.</p>
-        <p>Requests are rate-limited to 20 per user per hour. The resulting insight text is cached on your device. Per OpenAI's API terms, data submitted through the API is not used to train their models.</p>
-        <p>If you would rather no health figures reach OpenAI at all, simply do not open the AI insights card; the app falls back to insights computed entirely on your own device.</p>
+        <p>Requests are rate-limited to 20 per user per hour. The resulting insight text is cached on your device.</p>
+        <p>If you would rather no health figures reach any AI provider at all, simply do not open the AI insights card; the app falls back to insights computed entirely on your own device.</p>
       </div>
 
       <div class="sub">
@@ -483,7 +489,7 @@
       <ul>
         <li>We <strong>never</strong> use it for advertising, marketing, or any use-based data mining.</li>
         <li>We <strong>never</strong> sell it, trade it, or disclose it to data brokers, insurers, employers or advertising platforms.</li>
-        <li>We disclose it only to the connected people you chose (§5) and, for insight generation, to the AI provider described in §6.2.</li>
+        <li>We disclose it only to the connected people you chose (§5) and, for insight generation, to the AI providers described in §6.2.</li>
         <li>We use it only to provide the health and wellness features you can see in the app.</li>
         <li>We store it only where it is needed to provide those features, and we delete it on request.</li>
         <li>Bellwether reads from your health platform and never writes to it.</li>
@@ -552,7 +558,7 @@
         <li><strong>Encryption in transit</strong> (TLS) everywhere, and <strong>at rest</strong> on our servers.</li>
         <li><strong>On-device encryption</strong> — your session and cached health data live in the iOS Keychain or Android KeyStore, not in plain files. Sign-out wipes cached health data, cached circle data and cached profile images.</li>
         <li><strong>No user enumeration</strong> — finding someone requires their full, exact email address. Partial-match search was deliberately removed.</li>
-        <li><strong>No secrets in the app binary</strong> — the OpenAI key lives only in our server environment. The app cannot reach any AI provider directly.</li>
+        <li><strong>No secrets in the app binary</strong> — the AI provider keys live only in our server environment. The app cannot reach any AI provider directly.</li>
         <li><strong>Rate limiting</strong> on AI requests, and expiring, single-purpose invite codes.</li>
       </ul>
       <p>No system is perfectly secure. If you discover a vulnerability, please report it to <a href="mailto:bellwether.mobile@gmail.com">bellwether.mobile@gmail.com</a> rather than disclosing it publicly, and we will work with you.</p>
