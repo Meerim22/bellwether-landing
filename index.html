@@ -226,8 +226,13 @@
   .src{ display:flex; align-items:center; gap:.75rem; }
   .src + .src{ padding-left:2.4rem; border-left:1px solid var(--border); }
   @media (max-width:520px){ .src + .src{ padding-left:0; border-left:0; } }
-  .src-ico{ width:34px; height:34px; flex:none; display:grid; place-items:center; border-radius:10px; background:var(--surface-2); }
-  .src-ico svg{ width:19px; height:19px; }
+  /* These are the two apps' own icons, drawn full-bleed: the tile belongs to
+     the mark, so the chip gets no surface of its own. Both tiles are light by
+     design, and both modes here are dark — the rim and shadow stop them from
+     reading as cut-out holes in the strip. */
+  .src-ico{ width:34px; height:34px; flex:none; display:block; border-radius:8px; }
+  .src-ico svg{ width:100%; height:100%; display:block;
+    border-radius:inherit; box-shadow:0 1px 4px rgba(0,0,0,.4), 0 0 0 1px rgba(0,0,0,.28); }
   .src-name{ display:block; font-weight:700; font-size:.97rem; line-height:1.25; letter-spacing:-.005em; }
   .src-plat{ display:block; font-family:"IBM Plex Mono",monospace; font-size:.63rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3); margin-top:.12rem; }
   .src-note{ color:var(--ink-3); font-size:.875rem; line-height:1.5; max-width:44ch; }
@@ -568,17 +573,36 @@
 </header>
 
 <div class="strip">
+  <!-- The two icons below are Apple Health's and Health Connect's own marks,
+       traced from the shipping app icons so the strip shows what people will
+       actually tap through to, not a generic heart and a generic pulse line.
+       Paths are outlines, not glyphs: nothing here needs a webfont. -->
   <div class="wrap sources">
     <div class="src reveal">
       <span class="src-ico" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 20.5S3.5 15.4 3.5 9.6A4.6 4.6 0 0 1 12 7a4.6 4.6 0 0 1 8.5 2.6c0 5.8-8.5 10.9-8.5 10.9Z" fill="var(--alert)"/></svg>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ah-tile" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FCFCFC"/><stop offset="1" stop-color="#ECECEC"/>
+            </linearGradient>
+            <linearGradient id="ah-heart" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FF2D82"/><stop offset=".55" stop-color="#FF0A5B"/><stop offset="1" stop-color="#FF0030"/>
+            </linearGradient>
+          </defs>
+          <rect width="24" height="24" rx="5.65" fill="url(#ah-tile)"/>
+          <path fill="url(#ah-heart)" d="M8.90 5.97L9.88 6.03L10.77 6.38L11.51 7.01L11.97 7.72L12.72 6.78L13.64 6.17L14.53 5.97L15.39 6.00L15.90 6.12L16.79 6.52L17.62 7.24L18.05 7.84L18.46 8.79L18.63 9.96L18.54 11.14L18.17 12.34L17.51 13.55L16.53 14.81L15.39 15.96L13.38 17.54L12.14 18.26L11.57 18.14L9.99 17.08L8.81 16.13L7.49 14.84L6.26 13.18L5.86 12.40L5.57 11.60L5.40 10.74L5.40 9.53L5.57 8.70L5.92 7.90L6.40 7.21L7.27 6.49L8.01 6.15L8.90 5.97Z"/>
+        </svg>
       </span>
       <span><b class="src-name">Apple Health</b><span class="src-plat">iOS · HealthKit</span></span>
     </div>
 
     <div class="src reveal">
       <span class="src-ico" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--sleep)" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2.5-6 3.5 12 3-8 2 2h5"/></svg>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" rx="5.65" fill="#FFF"/>
+          <path fill="#003144" d="M8.47 5.15L9.46 5.20L10.37 5.41L11.37 5.89L11.98 6.32L11.98 6.45L10.33 8.10L9.90 7.84L9.20 7.62L8.29 7.62L7.43 7.93L6.69 8.53L6.21 9.36L6.04 10.14L6.13 11.09L6.47 11.87L7.08 12.52L6.95 13.30L7.04 14.77L7.34 15.77L8.03 16.98L5.09 13.95L4.52 13.21L3.87 11.74L3.70 10.05L3.79 9.31L4.05 8.40L4.35 7.75L4.96 6.89L5.69 6.19L6.69 5.59L7.77 5.24L8.47 5.15Z"/>
+          <path fill="#4285F4" fill-rule="evenodd" d="M14.97 5.15L16.27 5.24L17.35 5.59L18.35 6.19L19.22 7.06L19.95 8.32L20.30 9.57L20.34 10.66L20.13 11.91L19.61 13.08L19.00 13.91L14.88 18.02L13.93 18.54L12.89 18.85L11.46 18.89L10.59 18.72L9.42 18.20L8.99 17.89L8.21 17.16L7.69 16.42L7.30 15.60L6.99 14.34L6.99 13.08L7.17 12.22L7.69 11.00L8.08 10.44L12.07 6.32L13.24 5.59L13.80 5.37L14.97 5.15ZM14.88 7.62L14.15 7.84L13.71 8.10L10.33 11.52L9.55 12.56L9.33 13.34L9.33 14.04L9.46 14.64L10.07 15.64L11.02 16.29L11.72 16.46L12.33 16.46L13.02 16.29L13.58 15.99L17.18 12.35L17.57 11.87L17.83 11.35L18.00 10.57L17.96 9.83L17.79 9.23L17.35 8.53L16.88 8.10L16.36 7.80L15.75 7.62L14.88 7.62ZM14.84 8.53L15.58 8.53L16.23 8.79L16.66 9.18L17.05 10.01L17.09 10.66L16.88 11.39L16.31 12.04L15.66 12.35L15.01 12.39L14.23 12.13L13.71 11.65L13.37 10.87L13.37 10.01L13.58 9.44L14.15 8.84L14.84 8.53Z"/>
+        </svg>
       </span>
       <span><b class="src-name">Health Connect</b><span class="src-plat">Android</span></span>
     </div>
