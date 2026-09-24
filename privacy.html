@@ -256,7 +256,7 @@
   <div class="wrap inner">
     <p class="eyebrow">Legal</p>
     <h1>Privacy Policy</h1>
-    <p class="dates"><span>Effective <b>4 September 2026</b></span><span>Last updated <b>11 September 2026</b></span><span>App <b>com.bellw.app</b></span></p>
+    <p class="dates"><span>Effective <b>4 September 2026</b></span><span>Last updated <b>24 September 2026</b></span><span>App <b>com.bellw.app</b></span></p>
     <p class="standfirst">This app handles health information, so this policy says exactly what leaves your phone, where it goes, and what your family can and cannot see. It applies to the Bellwether mobile app for iOS and Android.</p>
   </div>
 </header>
@@ -295,7 +295,8 @@
     <section class="sec" id="s2">
       <h2><i>02</i>The short version</h2>
       <div class="short">
-        <div><b>We read from your health platform</b><span>Sleep, steps, distance, exercise, energy, heart rate and heart rate variability — read only. We never write to Apple Health or Health Connect.</span></div>
+        <div><b>We read from your health platform</b><span>Sleep, steps, distance, exercise, energy, heart rate, heart rate variability, VO₂ max, blood oxygen and — if you turn on cycle tracking — menstrual flow.</span></div>
+        <div><b>We write back one thing</b><span>The period days you log yourself, saved to Apple Health or Health Connect on your own device so they appear in your phone's own Cycle Tracking. Nothing else is ever written, and the flow you log is never uploaded to our servers.</span></div>
         <div><b>We never collect location</b><span>No GPS, no workout routes, no map data, no IP-based location tracking. The app asks for no location permission on either platform.</span></div>
         <div><b>We upload daily totals, not raw data</b><span>One row per person per day. Individual heartbeat samples, sleep records and workout sessions stay on your phone.</span></div>
         <div><b>Only people you connected with can see you</b><span>Sharing requires a mutual connection. Being in a friend-of-a-friend's circle gives no visibility.</span></div>
@@ -331,19 +332,22 @@
 
       <div class="sub">
         <h3>3.2 Health and wellness data</h3>
-        <p>Read from Apple HealthKit or Android Health Connect <strong>only after you explicitly grant permission</strong> on your device. Access is <strong>read-only</strong> — Bellwether never writes anything back to your health platform.</p>
+        <p>Read from Apple HealthKit or Android Health Connect <strong>only after you explicitly grant permission</strong> on your device. Everything below is read-only with a single exception — the period days you log yourself, which Bellwether writes back to your device's health platform. See <strong>What we write back</strong> below.</p>
         <p><strong>Categories read from your device:</strong></p>
         <ul>
           <li><strong>Sleep</strong> — time asleep, time in bed (iOS), and the light, deep, REM and awake stages</li>
           <li><strong>Activity</strong> — step count and walking/running distance</li>
           <li><strong>Exercise and energy</strong> — exercise minutes, workouts, active calories, total calories and basal energy (iOS, optional)</li>
           <li><strong>Heart</strong> — heart rate samples and heart rate variability (SDNN on iOS, RMSSD on Android)</li>
+          <li><strong>Fitness and oxygen</strong> — VO₂ max and blood oxygen (SpO₂), read only if you grant the separate permission the app asks for right after you connect</li>
+          <li><strong>Cycle</strong> — menstrual flow, read only if you turn on cycle tracking and grant its own separate permission from that screen's <strong>Connect</strong> step</li>
         </ul>
         <p><strong>What is stored on our servers:</strong> we do <strong>not</strong> upload raw samples. Your phone aggregates each day into a single daily summary, and that summary is what is stored: sleep hours and minutes, sleep score, deep/REM/light/awake minutes, steps, distance, exercise minutes, total and active calories, average/minimum/maximum heart rate, heart rate variability, a derived steadiness (“Calm”) reading, the date, which platform the reading came from, and an anonymous identifier for the device that wrote the row.</p>
         <p>We read at most the <strong>last 30 days</strong> from your health platform. We do not request the extended-history permission that would let us reach further back.</p>
+        <p><strong>What we write back:</strong> one category, and only from your own action. When you log a period day in Bellwether, the app writes that flow entry to Apple Health or Health Connect; when you clear the day, it deletes that entry again. This keeps your phone's own Cycle Tracking in step with what you logged. It happens only on your own device, only for days you log yourself, and only after you grant menstrual-flow access from the cycle tracking screen's <strong>Connect</strong> step. We write nothing else to your health platform, and the flow you log is never uploaded to our servers.</p>
         <div class="note calm">
           <p class="eyebrow">Never read or stored</p>
-          <p>Location or GPS coordinates, workout routes, blood glucose, blood pressure, oxygen saturation, body measurements, menstrual or reproductive health data, nutrition, medications, clinical records, or any health category not listed above. You can verify this in the app's system permission screen.</p>
+          <p>Location or GPS coordinates, workout routes, blood glucose, blood pressure, body measurements, nutrition, medications, clinical records, or any health category not listed above. You can verify this in the app's system permission screen.</p>
         </div>
       </div>
 
@@ -455,6 +459,7 @@
         </ul>
         <p>Whichever provider answers receives the same data:</p>
         <p><strong>What is sent:</strong> your daily figures only — sleep hours and score, deep and REM minutes, steps, distance, exercise minutes, heart rate and its range, heart rate variability, VO₂ max and a stress score; plus the reply language and whether the data belongs to you or “a family member.”</p>
+        <p>A cycle-tracking insight sends cycle figures in place of the daily ones: the current cycle day and phase, roughly how many days until the next predicted period, your average cycle length, and how many logged cycles that average is based on. No dates and no individual flow levels are sent.</p>
         <p><strong>What is not sent:</strong> your name, email address, account identifier, device identifier, profile photo, circle membership, or any free text you have typed. When generating a suggested nudge, the recipient's name is deliberately excluded.</p>
         <p>Requests are rate-limited to 20 per user per hour. The resulting insight text is cached on your device.</p>
         <p>If you would rather no health figures reach any AI provider at all, simply do not open the AI insights card; the app falls back to insights computed entirely on your own device.</p>
@@ -477,7 +482,7 @@
 
       <div class="sub">
         <h3>6.6 Apple HealthKit and Android Health Connect — on your device</h3>
-        <p>These are your phone's own health platforms, not our processors. They grant us read access only with your explicit permission and never receive anything from us.</p>
+        <p>These are your phone's own health platforms, not our processors. They grant us access only with your explicit permission. We read from them, and the one thing we ever write to them is a period day you logged yourself (§3.2).</p>
       </div>
 
       <p><strong>We do not sell your personal information, and we do not share it for cross-context behavioral advertising.</strong> Beyond the providers above, we disclose data only when compelled by valid legal process, to protect rights and safety, or — with notice to you — as part of a merger or acquisition.</p>
@@ -492,7 +497,7 @@
         <li>We disclose it only to the connected people you chose (§5) and, for insight generation, to the AI providers described in §6.2.</li>
         <li>We use it only to provide the health and wellness features you can see in the app.</li>
         <li>We store it only where it is needed to provide those features, and we delete it on request.</li>
-        <li>Bellwether reads from your health platform and never writes to it.</li>
+        <li>Bellwether reads from your health platform and writes back one thing only: a period day you logged yourself, saved to your own device so it appears in Cycle Tracking (§3.2).</li>
       </ul>
     </section>
 
@@ -526,6 +531,7 @@
         <li><strong>Delete</strong> your account and all associated data</li>
         <li><strong>Export</strong> a machine-readable copy of your data</li>
         <li><strong>Withdraw consent</strong> for health access at any time, in your device settings, without losing your account</li>
+        <li><strong>Remove the period days you logged</strong> in your phone's own Health or Health Connect app, or by clearing the day in Bellwether. Those entries live in your device's health store, not on our servers, so deleting your Bellwether account does not remove them</li>
         <li><strong>Turn off</strong> push notifications in your device settings</li>
         <li><strong>Disconnect</strong> from any person in your circle</li>
       </ul>
