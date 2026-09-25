@@ -53,7 +53,22 @@ Then open http://localhost:4174.
 - [ ] Add the twelve screenshots (six screens × two modes).
 - [ ] Point the App Store and Google Play buttons at the real listings — they are
       `#get` placeholders today.
-- [ ] Add an Open Graph image and description for link previews.
+- [x] Add an Open Graph image and description for link previews.
+
+## Search and link previews
+
+Every page carries a title, a description, a canonical URL on `https://bellw.app`
+and Open Graph and Twitter tags. `index.html` also carries a `MobileApplication`
+block in JSON-LD, which deliberately claims no price and no rating until the
+store listings exist to back them up.
+
+`assets/og-card.png` is the 1200×630 preview card — the app icon and the tagline
+on the Midnight background. It is generated, not drawn by hand — edit and re-run
+`tools/make-og-card.py` rather than retouching the PNG.
+
+`robots.txt` allows everything and points at `sitemap.xml`, which lists the three
+pages. Both files hardcode `bellw.app`, so they need editing if the domain
+changes.
 
 ## Licence
 

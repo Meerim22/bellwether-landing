@@ -16,7 +16,26 @@
     } catch (e) {}
   })();
 </script>
-<title>Bellwether</title>
+<title>Bellwether — know how they're doing before you ask</title>
+<meta name="description" content="Bellwether reads sleep, activity and stress from Apple Health and Health Connect, then hands you one calm summary each morning of how your family is doing.">
+<link rel="canonical" href="https://bellw.app/">
+<meta name="theme-color" content="#0B0F1D">
+
+<!-- Link previews. Both modes are dark at the edges, so the card is Midnight. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bellwether">
+<meta property="og:url" content="https://bellw.app/">
+<meta property="og:title" content="Bellwether — know how they're doing before you ask">
+<meta property="og:description" content="A quiet morning summary of how the people you love slept, moved and are holding up. On iOS and Android.">
+<meta property="og:image" content="https://bellw.app/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Bellwether app icon beside the words: know how they're doing before you ask.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bellwether — know how they're doing before you ask">
+<meta name="twitter:description" content="A quiet morning summary of how the people you love slept, moved and are holding up. On iOS and Android.">
+<meta name="twitter:image" content="https://bellw.app/assets/og-card.png">
+
 <link rel="icon" href="assets/favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="assets/app-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -949,5 +968,28 @@
       window.addEventListener('pagehide', showAll);
     }
   })();
+</script>
+
+<!-- What the app is, in the shape search engines read. Only facts the pages
+     themselves make — no price, no rating, until the listings are live. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Bellwether",
+  "url": "https://bellw.app/",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "iOS, Android",
+  "description": "Bellwether reads sleep, activity and stress from Apple Health and Health Connect, then hands you one calm summary each morning of how your family is doing.",
+  "image": "https://bellw.app/assets/og-card.png",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bellwether",
+    "url": "https://bellw.app/",
+    "email": "bellwether.mobile@gmail.com"
+  },
+  "privacyPolicy": "https://bellw.app/privacy.html",
+  "termsOfService": "https://bellw.app/terms.html"
+}
 </script>
 </html>
